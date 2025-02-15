@@ -40,4 +40,4 @@ jobs:
         run: |
           TEST_DIR=$(find . -type d -name test)
           echo "Test directory: $TEST_DIR"
-          sbt -Dtest.directory=$TEST_DIR -v test | tee test-results.log
+          sbt -v test | tee test-results.log
