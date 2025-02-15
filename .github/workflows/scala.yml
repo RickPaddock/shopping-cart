@@ -21,7 +21,12 @@ jobs:
 
     steps:
     - name: Install SBT
-      run: sudo apt-get update && sudo apt-get install -y sbt
+      run: |
+        echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
+        curl -fsSL https://repo.scala-sbt.org/scalasbt/debian/sbt-archive-keyring.gpg | sudo tee /usr/share/keyrings/sbt-archive-keyring.gpg > /dev/null
+        sudo apt-get update
+        sudo apt-get install -y sbt
+
       
     - uses: actions/checkout@v4
     - name: Set up JDK 11
