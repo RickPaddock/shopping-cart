@@ -33,8 +33,7 @@ jobs:
       - name: Check working directory
         run: |
           echo "Current directory: $(pwd)"
-          ls -la /home/shopping-basket
       - name: Build and Run Tests
         shell: bash
-        working-directory: /home/shopping-basket
+        working-directory: ./shopping-cart
         run: sbt -v +test
