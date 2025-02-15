@@ -30,7 +30,10 @@ jobs:
         uses: sbt/setup-sbt@v1
         with:
           sbt-runner-version: 1.9.9  # Ensures the latest stable SBT version
-
+      - name: Check working directory
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la /home/shopping-basket
       - name: Build and Run Tests
         shell: bash
         working-directory: /home/shopping-basket
