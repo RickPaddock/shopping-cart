@@ -35,5 +35,5 @@ jobs:
           echo "Current directory: $(pwd)"
       - name: Build and Run Tests
         shell: bash
-        working-directory: ./shopping-cart
+        working-directory: src/shopping-basket
         run: sbt -v +test
