@@ -38,6 +38,6 @@ jobs:
       - name: Build and Run Tests
         shell: bash
         run: |
-          TEST_DIR=$(find . -type d -name test)
-          echo "Test directory: $TEST_DIR"
+          # Move to the correct directory where `build.sbt` and `project/` folder exist
+          cd shopping-basket
           sbt -v test | tee test-results.log
