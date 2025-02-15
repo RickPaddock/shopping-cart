@@ -38,6 +38,6 @@ jobs:
       - name: Build and Run Tests
         shell: bash
         run: |
-          TEST_DIR=$(ls -R | grep test | head -n 1)
+          TEST_DIR=$(find . -type d -name test)
           echo "Test directory: $TEST_DIR"
           sbt -Dtest.directory=$TEST_DIR test | tee test-results.log
