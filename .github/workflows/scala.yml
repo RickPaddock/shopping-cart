@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+  JAVA_OPTS: -Xms2048M -Xmx2048M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,16 +19,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Set Up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: sbt  # Enables caching for SBT dependencies
+
       - name: Set Up SBT
-        run: |
-          echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
-          echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-          curl -fsSL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x99E82A75642AC823 | sudo gpg --dearmor -o /usr/share/keyrings/sbt-keyring.gpg
-          sudo apt-get update
-          sudo apt-get install -y sbt
+        uses: sbt/setup-sbt@v1
+        with:
+          sbt-runner-version: 1.9.9  # Ensures the latest stable SBT version
 
-      - name: Verify SBT Installation
-        run: sbt --version
-
-      - name: Run Tests
-        run: sbt test
+      - name: Build and Run Tests
+        shell: bash
+        run: sbt -v +test
