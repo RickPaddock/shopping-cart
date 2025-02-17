@@ -64,7 +64,6 @@ def check_base_prices(base_prices: dict) -> None:
 def check_items_exist(items: List[str], base_prices: dict) -> None:
     """ Raise exception if item requested does not exist """
     items_missing = [item for item in items if item not in base_prices.keys()]
-
     if len(items_missing) > 0:
         raise ValueError(f"Your requested items are not available:\n" + "\n".join(items_missing))
 
@@ -151,8 +150,6 @@ def calc_discounts(items: List[str]) -> Tuple[float, List[str]]:
             discount, desc = calc_reduction(rule, items)
         elif rule["type"] == "bogof":
             discount, desc = calc_bogof(rule, items)
-        else:
-            discount, desc = 0.0,
         if discount > 0:
             total_discount += discount
             descriptions.append(desc)

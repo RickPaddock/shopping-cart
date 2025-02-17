@@ -124,6 +124,7 @@ object ShoppingCart {
     items.map(item => base_prices(item)).sum
   }
 
+
   def generate_receipt(items: List[String]): Unit = {
 
     val subtotal = calc_subtotal(BASE_PRICES, items)
