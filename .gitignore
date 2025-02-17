@@ -14,3 +14,5 @@ target/
 
 instructions.txt
 python_shoppingcart_complex.py
+
+.metals/

@@ -1,4 +1,3 @@
-import sys
 import argparse
 from typing import List, Dict, Tuple # Not required in Python version >3.9
 
@@ -6,14 +5,15 @@ from typing import List, Dict, Tuple # Not required in Python version >3.9
 ###################################
 ### AVAILABLE ITEMS & DISCOUNTS ###
 ###################################
-# These can be added dynamically without need for logic change
+# These mimic json files. Easy to ad new items and discounts
+# Considered using dataclasses/pydantic but seemed overkill for this simple code
 
-# Base £ prices
+# Prices in £
 BASE_PRICES = {
         "Soup": 0.65,
         "Bread": 0.80,
         "Milk": 1.30,
-        "Apple": 1.00
+        "Apples": 1.00
     }
 
 
@@ -22,7 +22,7 @@ DISCOUNT_RULES = [
         {
             "discount": "Apples 10% off",
             "type": "reduction",
-            "item": "Apple",
+            "item": "Apples",
             "percent": 10,
         },
         {
@@ -31,17 +31,19 @@ DISCOUNT_RULES = [
             "conditional_item": "Soup",
             "conditional_quantity": 2,
             "discount_item": "Bread",
-            "discount_multiplier": 0.50,
+            "discount_percent": 0.50,
         },
     ]
+
 
 #############################
 ### DQ/CLENSING FUNCTIONS ###
 #############################
 
+# >>>>> Note: data type checking could be enforced with PYDANTIC instead <<<<<<
 def check_base_prices(base_prices: dict) -> None:
     """ Raise an exception if BASE_PRICES is not in correct format """
-    errors_found = [] 
+    errors_found = [] # Capture all errors so multiple can be reported at once
     for item, price in base_prices.items():
         # Item case check
         if item != item.capitalize():
@@ -61,10 +63,7 @@ def check_base_prices(base_prices: dict) -> None:
 
 def check_items_exist(items: List[str], base_prices: dict) -> None:
     """ Raise exception if item requested does not exist """
-    items_missing = []
-    for item in items:
-        if item not in base_prices.keys():
-            items_missing.append(item)
+    items_missing = [item for item in items if item not in base_prices.keys()]
 
     if len(items_missing) > 0:
         raise ValueError(f"Your requested items are not available:\n" + "\n".join(items_missing))
@@ -111,12 +110,10 @@ def calc_bogof(rule: Dict, items: List[str]) -> Tuple[float, str]:
     conditional_quantity = rule["conditional_quantity"]
     # The item on which the discount will be applied (e.g. Bread * 0.5)
     discount_item = rule["discount_item"]
-    discount_multiplier = rule["discount_multiplier"]
-    # Ensuring the quantity of items provided satifies the discount conditions 
+    discount_percent = rule["discount_percent"]
+    # Ensuring the quantity of items provided satifies the discont conditions 
     count_conditional_item = items.count(conditional_item)
     count_discount_item = items.count(discount_item)
-    if count_conditional_item < conditional_quantity or count_discount_item == 0:
-        return 0.0, ""
 
     # The discount applies once for every MULTIPLE set of conditional_item
     # E.G. if there are 6 soups, and discount applied for evry 2, this returns 3
@@ -124,12 +121,24 @@ def calc_bogof(rule: Dict, items: List[str]) -> Tuple[float, str]:
     # The discount can only apply to the number of relevant items in the basket
     # E.G. 3 sets means there are 3 possible discounts to apply, so up to 3 Breads!
     applicable = min(sets, count_discount_item)
-    discount = round(BASE_PRICES[discount_item] * discount_multiplier * applicable, 2)
+
+    if sets > count_discount_item:
+        possible = sets - count_discount_item
+        print("You are not taking advantage of possible offers!")
+        print(f"You have {count_conditional_item} {conditional_item}. You are eligible for {discount_percent} discount on {possible} more {discount_item}\n")
+
+    # No valid offers returns default values
+    if count_conditional_item < conditional_quantity or count_discount_item == 0:
+        return 0.0, ""
+
+    # Apply discount to all applicable items
+    discount = round(BASE_PRICES[discount_item] * discount_percent * applicable, 2)
+
     return discount, f"{rule['discount']}: {int(discount * 100)}p"
 
 
 
-def calculate_discounts(items: List[str]) -> Tuple[float, List[str]]:
+def calc_discounts(items: List[str]) -> Tuple[float, List[str]]:
     """
     Process all discount rules and return the total discount amount
     and a list of discount description strings.
@@ -143,7 +152,7 @@ def calculate_discounts(items: List[str]) -> Tuple[float, List[str]]:
         elif rule["type"] == "bogof":
             discount, desc = calc_bogof(rule, items)
         else:
-            discount, desc = 0.0, ""
+            discount, desc = 0.0,
         if discount > 0:
             total_discount += discount
             descriptions.append(desc)
@@ -174,7 +183,7 @@ def generate_receipt(items: List[str], Itemised=False) -> None:
         calc_itemised(items) 
         
     subtotal = calc_subtotal(items)
-    discount_total, discount_descriptions = calculate_discounts(items)
+    discount_total, discount_descriptions = calc_discounts(items)
     total = round(subtotal - discount_total, 2)
 
     print(f"Subtotal: £{subtotal:.2f}")
@@ -187,20 +196,22 @@ def generate_receipt(items: List[str], Itemised=False) -> None:
 
 
 def main():
+    # Parse items from command line. argparse makes this easier to include '-i'
     parser = argparse.ArgumentParser(description="Shopping Cart CLI")
     parser.add_argument("items", nargs="*", help="List of items to purchase")
     parser.add_argument("-i", "--Itemised", action="store_true", help="Print Itemised receipt")
 
     args = parser.parse_args()
 
+    # This DQ check would normally be done in the residing Database, not here
     check_base_prices(BASE_PRICES)
 
     if not args.items:
         print("Syntax must be: python <code_name.py> item1 item2 item3 ...")
-        sys.exit(1)
-    items = clean_items(args.items)
-    check_items_exist(items, BASE_PRICES)
-    generate_receipt(items, Itemised=args.Itemised)
+    else:
+        items = clean_items(args.items)
+        check_items_exist(items, BASE_PRICES)
+        generate_receipt(items, Itemised=args.Itemised)
 
 
 if __name__ == "__main__":
