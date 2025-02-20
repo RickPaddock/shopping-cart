@@ -7,7 +7,7 @@ class PriceSummaryTest extends munit.FunSuite {
   test("clean_items() should capitalize the first letter of each word") {
     val input = List("apple", "BREAD", "Car", "hOLIDAY")
     val expected_results = List("Apple", "Bread", "Car", "Holiday")
-    assertEquals(ShoppingCart.clean_items(input), expected_results)
+    assertEquals(PriceBasket.clean_items(input), expected_results)
   }
 
 
@@ -21,11 +21,11 @@ class PriceSummaryTest extends munit.FunSuite {
     
     // Sums all values correctly
     val input_items1 = List("Soup", "Bread", "Milk", "Apples")
-    assertEquals(ShoppingCart.calc_subtotal(BASE_PRICES, input_items1), 3.75)
+    assertEquals(PriceBasket.calc_subtotal(BASE_PRICES, input_items1), 3.75)
 
     // Duplicate items and negative values
     val input_items2 = List("Soup", "Soup", "Bread", "Apples", "Milk", "neg_val")
-    assertEquals(ShoppingCart.calc_subtotal(BASE_PRICES, input_items2), -95.6)
+    assertEquals(PriceBasket.calc_subtotal(BASE_PRICES, input_items2), -95.6)
 
      // TODO: Providing an item which doesnt exist causes error. Need to fix to return 0
 
@@ -48,14 +48,14 @@ class PriceSummaryTest extends munit.FunSuite {
 
     // returns correct value for 1 discounted item
     val input_items1 = List("Apples")
-    assertEquals(ShoppingCart.calc_reduction(BASE_PRICES, DISCOUNT_RULES_map, input_items1), (0.1, "Apples 10% off: 10p"))
+    assertEquals(PriceBasket.calc_reduction(BASE_PRICES, DISCOUNT_RULES_map, input_items1), (0.1, "Apples 10% off: 10p"))
 
     // returns correct value for multiple discounted items
     val input_items2 = List("Apples", "Apples", "Apples", "Apples")
-    assertEquals(ShoppingCart.calc_reduction(BASE_PRICES, DISCOUNT_RULES_map, input_items2), (0.4, "Apples 10% off: 40p"))
+    assertEquals(PriceBasket.calc_reduction(BASE_PRICES, DISCOUNT_RULES_map, input_items2), (0.4, "Apples 10% off: 40p"))
 
     val input_items3 = List("None")
-    assertEquals(ShoppingCart.calc_reduction(BASE_PRICES, DISCOUNT_RULES_map, input_items3), (0.0, ""))
+    assertEquals(PriceBasket.calc_reduction(BASE_PRICES, DISCOUNT_RULES_map, input_items3), (0.0, ""))
   }
 
 
@@ -78,23 +78,23 @@ class PriceSummaryTest extends munit.FunSuite {
 
     // returns correct value for eligible discounted items
     val input_items1 = List("Soup", "Soup", "Bread")
-    assertEquals(ShoppingCart.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items1), (0.4, "Buy 2 tins of soup and get a loaf of bread for half price: 40p"))
+    assertEquals(PriceBasket.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items1), (0.4, "Buy 2 tins of soup and get a loaf of bread for half price: 40p"))
 
     // returns correct value for multiple discounted items
     val input_items2 = List("Soup", "Soup", "Bread", "Soup", "Soup", "Bread")
-    assertEquals(ShoppingCart.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items2), (0.8, "Buy 2 tins of soup and get a loaf of bread for half price: 80p"))
+    assertEquals(PriceBasket.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items2), (0.8, "Buy 2 tins of soup and get a loaf of bread for half price: 80p"))
 
     // Non-matching items return 0.0 and missin
     val input_items3 = List("None")
-    assertEquals(ShoppingCart.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items3), (0.0, ""))
+    assertEquals(PriceBasket.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items3), (0.0, ""))
 
     // Qualifying conditional items return nothing if there is no discounted item available (i.e. 2 soups but no bread)
     val input_items4 = List("Soup", "Soup")
-    assertEquals(ShoppingCart.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items4), (0.0, ""))
+    assertEquals(PriceBasket.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items4), (0.0, ""))
 
     // The required discounted items exist (i.e. 1 bread) but not enough qualifying conditional items exist (i.e. 1 soup not 2) returns nothing
     val input_items5 = List("Soup", "Bread")
-    assertEquals(ShoppingCart.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items5), (0.0, ""))
+    assertEquals(PriceBasket.calc_bogof(BASE_PRICES, DISCOUNT_RULES_map, input_items5), (0.0, ""))
   }
 
 
@@ -103,7 +103,7 @@ class PriceSummaryTest extends munit.FunSuite {
   // test("calc_discounts() should return total discount value and all discount text") {
         // calc_reduction = (0.4, "Apples 10% off: 40p")
         // calc_bogof = (0.8, "Buy 2 tins of soup and get a loaf of bread for half price: 80p")
-  //   assertEquals(ShoppingCart.calc_discounts(input), expected_results)
+  //   assertEquals(PriceBasket.calc_discounts(input), expected_results)
   // }
 
 } // End of PriceSummaryTests
