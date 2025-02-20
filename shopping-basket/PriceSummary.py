@@ -97,10 +97,10 @@ def calc_reduction(rule: Dict, items: List[str]) -> Tuple[float, str]:
 
 
 def calc_bogof(rule: Dict, items: List[str]) -> Tuple[float, str]:
-    """ Apply "buy X get Y discount" offer.
+    """ Apply "buy X get Y discount" offer
         Parameters:
-            - rule: details of 1 specific discount offer.
-            - items: list of items provided by user.
+            - rule: details of 1 specific discount offer
+            - items: list of items provided by user
         Returns:
             (discount_amount, discount_description)
     """
