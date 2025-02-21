@@ -38,11 +38,19 @@ cd /directory/path/of/downloads/
 
 ### 5. Run Scala application
 Run the following command:<br>
+
 ``` sh
 PriceBasket Milk Apples Soup Bread
 ```
+
 <br>
-Alternatively, if that doesn't work you can run the jar file directly:<br>
+Alternatively, if that doesn't work you can try:<br> 
+
+``` sh
+./PriceBasket.sh Milk Apples Soup Bread
+```
+
+or run the jar file directly:<br>
 
 ``` sh
 java -jar shopping-cart-1.0.0.jar Milk Apples Soup Bread
