@@ -23,12 +23,13 @@ If Java is not installed then please [download the JDK](https://www.oracle.com/j
 
 ### 3. Download the JAR File
 Navigate to the 'Releases' section on the right hand side of the github project.
-Select v1.0.0, and download the <b>shopping-cart-1.0.0.jar</b> file.<br>
+Select <b>v1.0.0</b>, and download the <b>shopping-cart-1.0.0.jar</b> file.<br>
 
 ### 4.Navigate to the downloaded JAR location 
-In your open CLI; use the `cd` command to navigate to the location of the downloaded jar file:<br>
+In your open CLI; use the `cd` command to navigate to the location of the downloaded jar file. For example:<br>
+
 ``` sh
-cd /directory/path/of/downloaded/shopping-cart-1.0.0.jar
+cd /directory/path/of/downloads/
 ```
 
 ### 5. Run Scala application
