@@ -53,6 +53,8 @@ You need to clone the repo from [github/RickPaddock/shopping-cart](https://githu
 - Check GIT installation by running `git --version`. If installed run:
 ```sh
 git clone https://github.com/RickPaddock/shopping-cart.git
+```
+```sh
 cd shopping-cart
 ```
 <br>
@@ -69,7 +71,7 @@ This will download the latest code from the repository, & navigate into the proj
   ```
 
 ### 3. Pull the Scala SBT Docker Image
-Run the following to download the official Scala SBT docker image:<br>
+Ensure Docker Desktop is running, then run the following in your CLI to download the official Scala SBT docker image:<br>
 ```docker pull hseeberger/scala-sbt:8u222_1.3.5_2.13.1```
 
 ### 4. Run the Container (mounted)
