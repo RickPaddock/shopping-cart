@@ -13,19 +13,24 @@ This has an additional and optional `-i` command line argument which prints the 
 # Using JAR file
 
 ### 1. Open a Command Line Interface (CLI) depending on your operating system
-- Open Command Prompt (cmd) or PowerShell on Windows
+- Open Command Prompt (cmd), PowerShell, or Bash on Windows
 - Open the Terminal on Mac/Linux
 
 ### 2. Ensure Java is installed
 Make sure you have Java 8 JDK. To check; run `java -version` from the command line.<br>
 If Java is not installed then please [download the JDK](https://www.oracle.com/java/technologies/downloads/#java8) and install.
 
-### 3. Download the JAR File
+### 3. Download the relevant files
 Navigate to the 'Releases' section on the right hand side of the github project.
-Select <b>v1.0.0</b>, and download the <b>shopping-cart-1.0.0.jar</b> file.<br>
+Select <b>v1.0.0</b>, and download the following files: 
+- <b>shopping-cart-1.0.0.jar</b> 
+- <b>PriceBasket.bat</b>
+- <b>PriceBasket.sh</b>
+<br><br>
+Ensure all files are downloaded to the same directory.
 
 ### 4.Navigate to the downloaded JAR location 
-In your open CLI; use the `cd` command to navigate to the location of the downloaded jar file. For example:<br>
+In your open CLI; use the `cd` command to navigate to the location of the downloaded files. For example:<br>
 
 ``` sh
 cd /directory/path/of/downloads/
@@ -34,10 +39,17 @@ cd /directory/path/of/downloads/
 ### 5. Run Scala application
 Run the following command:<br>
 ``` sh
+PriceBasket Milk Apples Soup Bread
+```
+<br>
+Alternatively, if that doesn't work you can run the jar file directly:<br>
+
+``` sh
 java -jar shopping-cart-1.0.0.jar Milk Apples Soup Bread
 ```
 
-Replace the path with your actual JAR file path and add any command-line arguments as needed.<br><br><br>
+Replace or add add any command-line arguments as needed.<br><br><br>
+
 
 # Using Docker Desktop
 
