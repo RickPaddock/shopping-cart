@@ -23,18 +23,18 @@ If Java is not installed then please [download the JDK](https://www.oracle.com/j
 
 ### 3. Download the JAR File
 Navigate to the 'Releases' section on the right hand side of the github project.
-Download the <b>XX.jar</b> file.<br>
+Download the <b>shopping-cart-1.0.0.jar</b> file.<br>
 
 ### 4.Navigate to the downloaded JAR location 
 In your open CLI; use the `cd` command to navigate to the location of the downloaded jar file:<br>
 ``` sh
-cd /directory/path/of/downloaded/XX.jar
+cd /directory/path/of/downloaded/shopping-cart-1.0.0.jar
 ```
 
 ### 5. Run Scala application
 Run the following command:<br>
 ``` sh
-java -jar target/scala-2.13/XX.jar Milk Apples Soup Bread`
+java -jar target/scala-2.13/shopping-cart-1.0.0.jar Milk Apples Soup Bread`
 ```
 
 Replace the path with your actual JAR file path and add any command-line arguments as needed.<br><br><br>
@@ -97,9 +97,9 @@ This executes the PriceBasket app inside the container.<br>
 
 # Python code
 This Python code is the same as the Scala version, but includes some extra data validation,<br>
-and an additional (and optional) `-i` command line argument which prints the cumulative price of items.<br><br>
+and an additional (optional) `-i` command line argument which prints the cumulative price of items.<br><br>
 
-For example:
+For example:<br>
 ![alt text](Python_output_screenshot.png)
 
 <br>
