@@ -23,7 +23,7 @@ If Java is not installed then please [download the JDK](https://www.oracle.com/j
 
 ### 3. Download the JAR File
 Navigate to the 'Releases' section on the right hand side of the github project.
-Download the <b>shopping-cart-1.0.0.jar</b> file.<br>
+Select v1.0.0, and download the <b>shopping-cart-1.0.0.jar</b> file.<br>
 
 ### 4.Navigate to the downloaded JAR location 
 In your open CLI; use the `cd` command to navigate to the location of the downloaded jar file:<br>
