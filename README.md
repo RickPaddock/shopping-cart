@@ -34,7 +34,7 @@ cd /directory/path/of/downloaded/shopping-cart-1.0.0.jar
 ### 5. Run Scala application
 Run the following command:<br>
 ``` sh
-java -jar target/scala-2.13/shopping-cart-1.0.0.jar Milk Apples Soup Bread`
+java -jar target/scala-2.13/shopping-cart-1.0.0.jar Milk Apples Soup Bread
 ```
 
 Replace the path with your actual JAR file path and add any command-line arguments as needed.<br><br><br>
