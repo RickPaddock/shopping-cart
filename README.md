@@ -5,8 +5,7 @@ This ReadMe contains instructions on how to run the code in two seperate ways:
 1. [Using JAR file](#Using-JAR-file) 
 2. [Using Docker Desktop](#Using-Docker-Desktop) 
  
-I advise using the JAR file as it is pre-compiled and runs substantially quicker,<br> 
-but if you have any issue with that then try using Docker Desktop.
+I advise using the JAR file as it is pre-compiled and runs substantially quicker, but if you have any issue with that then try using Docker Desktop.
 
 Additionally, there is the equivalent code in Python, which can be run using [these instructions](#Python-code)<br>
 This has an additional and optional `-i` command line argument which prints the cumulative price of items.
@@ -35,7 +34,7 @@ cd /directory/path/of/downloads/
 ### 5. Run Scala application
 Run the following command:<br>
 ``` sh
-java -jar target/scala-2.13/shopping-cart-1.0.0.jar Milk Apples Soup Bread
+java -jar shopping-cart-1.0.0.jar Milk Apples Soup Bread
 ```
 
 Replace the path with your actual JAR file path and add any command-line arguments as needed.<br><br><br>
