@@ -51,8 +51,10 @@ You need to clone the repo from [github/RickPaddock/shopping-cart](https://githu
 #### a. Git clone
 - Open a Command Line Interface (terminal)
 - Check GIT installation by running `git --version`. If installed run:
-```git clone https://github.com/RickPaddock/shopping-cart.git```<br>
-```cd shopping-cart```<br>
+```sh
+git clone https://github.com/RickPaddock/shopping-cart.git
+cd shopping-cart
+```<br>
 This will download the latest code from the repository, & navigate into the project folder.
 
 #### b. Manually clone by downloading
