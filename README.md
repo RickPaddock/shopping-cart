@@ -120,7 +120,7 @@ The code can be run using one of the following two ways:
 If you already have Python installed, you use that. <br>
 Alternatively you can download from the [official Python website](https://www.python.org/downloads/).
 
-Once installed download the code (PriceBasket.py) from the repo, save to your local computer, and run using the following command:
+Once installed download the code (PriceBasket.py) from the repo & save to your local computer. Open your CLI, navigate to the downloaded code, and run using the following command:
 ```python
 python PriceBasket.py milk
 ```
